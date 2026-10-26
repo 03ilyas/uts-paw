@@ -456,6 +456,190 @@ pre {
   white-space: nowrap;
 }
 
+/* ---------- tutorial ---------- */
+
+.kode .baris {
+  display: block;
+  margin: 0 -52px 0 -18px;
+  padding: 0 52px 0 15px;
+  border-left: 3px solid transparent;
+}
+
+.kode .sorot {
+  border-left-color: var(--emas);
+  background: rgba(200, 168, 72, 0.16);
+}
+
+.tanda-sorot {
+  padding: 0 4px;
+  border-left: 3px solid var(--emas);
+  background: rgba(200, 168, 72, 0.22);
+}
+
+.tutorial {
+  max-width: 860px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.tutorial-pengantar p {
+  max-width: 72ch;
+  margin-top: 0;
+}
+
+.kartu-hasil {
+  margin: 8px 0 40px;
+}
+
+.langkah-tutorial {
+  margin-bottom: 48px;
+  padding-top: 8px;
+}
+
+.langkah-tutorial h2 {
+  margin: 4px 0 8px;
+  font-size: 22px;
+  scroll-margin-top: 88px;
+}
+
+.langkah-tutorial .penjelasan li + li {
+  margin-top: 6px;
+}
+
+.langkah-tutorial :not(pre) > code,
+.tutorial-pengantar code,
+.tutorial .ant-alert code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--netral);
+  font-size: 0.88em;
+}
+
+.kotak-cek.ant-alert {
+  border-color: #c9d9bd;
+  background: #e9f0e1;
+}
+
+.cek-langkah {
+  margin: 4px 0 0;
+  padding-left: 20px;
+}
+
+/* Pratinjau hidup: gaya polos seperti hasil kerja mahasiswa, sengaja bukan gaya antd. */
+.demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  color: #1f2328;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+}
+
+.demo-formulir {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.demo-formulir label {
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.demo-formulir input,
+.demo-formulir select,
+.demo-tambah-item select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.demo-formulir [role='alert'] {
+  margin: 0;
+  color: #b42318;
+  font-size: 0.9rem;
+}
+
+.demo button {
+  align-self: flex-start;
+  padding: 0.55rem 1.4rem;
+  border: 0;
+  border-radius: 6px;
+  background: #1f2328;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.demo-formulir button {
+  margin-top: 0.75rem;
+}
+
+.demo-keluaran {
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--netral);
+  font-size: 14px;
+}
+
+.demo-keluaran pre {
+  margin: 6px 0 14px;
+  white-space: pre-wrap;
+  font-size: 12.5px;
+}
+
+.demo-keluaran ul {
+  margin: 6px 0 14px;
+  padding-left: 18px;
+}
+
+.demo-keluaran p {
+  margin: 6px 0 0;
+  color: var(--sekunder);
+}
+
+.demo-tambah-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demo-tabel-gulir {
+  overflow-x: auto;
+}
+
+.demo-tabel {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.demo-tabel th,
+.demo-tabel td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #dcdcdc;
+  text-align: left;
+}
+
+.demo-tabel thead th {
+  background: #f1f1f1;
+}
+
+.demo-tabel tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.demo-tabel td:last-child,
+.demo-tabel th:last-child {
+  text-align: right;
+}
+
+.demo-tabel tfoot th,
+.demo-tabel tfoot td {
+  border-top: 2px solid #1f2328;
+  font-weight: 600;
+}
+
 /* ---------- materi ---------- */
 
 .daftar-materi {
@@ -505,6 +689,10 @@ pre {
 
   .navigasi-samping {
     display: none;
+  }
+
+  .demo {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .alur {

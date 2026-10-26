@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useKoleksi from '../hooks/useKoleksi.js'
+import './Tambah.css'
 
 const AWAL = { judul: '', kategori: 'Kuliah', tenggat: '', prioritas: 'sedang' }
 
@@ -23,8 +24,9 @@ export default function Tambah() {
   }
 
   return (
-    <form onSubmit={simpan} noValidate>
+    <form className="formulir" onSubmit={simpan} noValidate>
       <h1>Tambah Tugas</h1>
+
       <label htmlFor="judul">Judul</label>
       <input id="judul" name="judul" value={form.judul} onChange={ubah} />
       {galat && <p role="alert">{galat}</p>}
@@ -37,6 +39,13 @@ export default function Tambah() {
 
       <label htmlFor="tenggat">Tenggat</label>
       <input id="tenggat" name="tenggat" type="date" value={form.tenggat} onChange={ubah} />
+
+      <label htmlFor="prioritas">Prioritas</label>
+      <select id="prioritas" name="prioritas" value={form.prioritas} onChange={ubah}>
+        <option value="rendah">Rendah</option>
+        <option value="sedang">Sedang</option>
+        <option value="tinggi">Tinggi</option>
+      </select>
 
       <button type="submit">Simpan</button>
     </form>

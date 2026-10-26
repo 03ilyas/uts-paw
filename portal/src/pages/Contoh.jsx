@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom'
-import { Alert, Anchor, Tag } from 'antd'
+import { Link, useSearchParams } from 'react-router-dom'
+import { Alert, Anchor, Tabs, Tag } from 'antd'
 import KepalaHalaman from '../components/KepalaHalaman.jsx'
 import Kode from '../components/Kode.jsx'
-
-// Berkas contoh dibaca langsung dari shared/contoh/, folder yang sama dengan yang
-// diuji grader, sehingga kode di halaman ini selalu kode yang lulus uji.
-const BERKAS = import.meta.glob('../../../shared/contoh/**/*.{js,jsx,css,json}', { query: '?raw', import: 'default', eager: true })
-const isi = (path) => BERKAS[`../../../shared/contoh/${path}`]
+import TutorialForm from './TutorialForm.jsx'
+import TutorialTabel from './TutorialTabel.jsx'
+import { isi } from '../contoh.js'
 
 const BAGIAN = [
   {
@@ -117,7 +115,7 @@ const BAGIAN = [
         browser, dan tombolnya bertuliskan <strong>Simpan</strong>. Tambahkan input untuk tiga field temamu.
       </>
     ),
-    berkas: ['src/pages/Tambah.jsx'],
+    berkas: ['src/pages/Tambah.jsx', 'src/pages/Tambah.css'],
   },
   {
     key: 'statistik',
@@ -129,7 +127,7 @@ const BAGIAN = [
         <code>thead</code>, <code>tbody</code>, dan <code>tfoot</code>.
       </>
     ),
-    berkas: ['src/pages/Statistik.jsx'],
+    berkas: ['src/pages/Statistik.jsx', 'src/pages/Statistik.css'],
   },
   {
     key: 'halaman-lain',
@@ -169,14 +167,9 @@ const BAGIAN = [
   },
 ]
 
-export default function Contoh() {
+function SemuaContoh() {
   return (
     <>
-      <KepalaHalaman kicker="Contoh Kode" judul="Contoh untuk setiap kode yang diminta">
-        Contoh aplikasi Daftar Tugas yang memenuhi kontrak penilaian. Setiap bagian menyebut butir rubrik yang dipenuhinya. Seluruh contoh
-        sudah dijalankan dengan uji otomatis dosen dan lulus.
-      </KepalaHalaman>
-
       <Alert
         type="warning"
         showIcon
@@ -218,6 +211,27 @@ export default function Contoh() {
           <Anchor offsetTop={96} items={BAGIAN.map((b) => ({ key: b.key, href: `#${b.key}`, title: b.judul }))} />
         </aside>
       </div>
+    </>
+  )
+}
+
+const TAB = [
+  { key: 'form', label: 'Tutorial: Form', children: <TutorialForm /> },
+  { key: 'tabel', label: 'Tutorial: Tabel', children: <TutorialTabel /> },
+  { key: 'semua', label: 'Semua contoh kode', children: <SemuaContoh /> },
+]
+
+export default function Contoh() {
+  const [params, setParams] = useSearchParams()
+  const aktif = TAB.some((t) => t.key === params.get('tab')) ? params.get('tab') : 'form'
+
+  return (
+    <>
+      <KepalaHalaman kicker="Contoh Kode" judul="Contoh untuk setiap kode yang diminta">
+        Mulai dari tutorial langkah demi langkah untuk form dan tabel, lalu lihat contoh lengkap setiap kode yang diminta. Semua contoh
+        memakai tema Daftar Tugas dan sudah lulus uji otomatis dosen.
+      </KepalaHalaman>
+      <Tabs activeKey={aktif} onChange={(key) => setParams({ tab: key })} items={TAB} size="large" />
     </>
   )
 }

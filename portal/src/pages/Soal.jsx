@@ -151,7 +151,8 @@ export default function Soal() {
               <code>htmlFor</code> dan <code>id</code>; tombol kirim bertuliskan <strong>Simpan</strong>; pesan error
               memakai <code>role="alert"</code>. Tulis validasi sendiri di JavaScript; atribut <code>required</code>{' '}
               saja tidak cukup karena pesannya berupa popup browser. Hanya Judul yang wajib diisi, field lain boleh punya
-              nilai bawaan. Setelah disimpan, arahkan ke <code>/koleksi</code>.
+              nilai bawaan. Setelah disimpan, arahkan ke <code>/koleksi</code>. Ikuti{' '}
+              <Link to="/contoh?tab=form">tutorial form langkah demi langkah</Link>.
             </li>
             <li>
               Halaman detail punya tombol bertuliskan <strong>Hapus</strong>. Konfirmasi memakai{' '}
@@ -159,7 +160,10 @@ export default function Soal() {
               "tidak ditemukan" di halaman detail tanpa teks "404".
             </li>
             <li>Halaman 404 memuat teks <strong>404</strong>.</li>
-            <li>Halaman <code>/statistik</code> memakai elemen <code>&lt;table&gt;</code>.</li>
+            <li>
+              Halaman <code>/statistik</code> memakai elemen <code>&lt;table&gt;</code>. Ikuti{' '}
+              <Link to="/contoh?tab=tabel">tutorial tabel langkah demi langkah</Link>.
+            </li>
             <li>Halaman <code>/tentang</code> menampilkan nama dan NIM persis seperti di <code>app/mahasiswa.json</code>.</li>
             <li>
               Custom hook berada di <code>src/hooks/useNamaHook.js</code> (nama berkas diawali <code>use</code>),

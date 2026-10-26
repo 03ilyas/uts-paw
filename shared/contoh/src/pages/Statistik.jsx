@@ -1,4 +1,5 @@
 import useKoleksi from '../hooks/useKoleksi.js'
+import './Statistik.css'
 
 export default function Statistik() {
   const { items } = useKoleksi()
@@ -7,28 +8,30 @@ export default function Statistik() {
   return (
     <section>
       <h1>Statistik</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Kategori</th>
-            <th>Jumlah</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(perKategori).map(([kategori, jumlah]) => (
-            <tr key={kategori}>
-              <td>{kategori}</td>
-              <td>{jumlah}</td>
+      <div className="tabel-gulir">
+        <table className="tabel-data">
+          <thead>
+            <tr>
+              <th>Kategori</th>
+              <th>Jumlah</th>
             </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>Total</th>
-            <td>{items.length}</td>
-          </tr>
-        </tfoot>
-      </table>
+          </thead>
+          <tbody>
+            {Object.entries(perKategori).map(([kategori, jumlah]) => (
+              <tr key={kategori}>
+                <td>{kategori}</td>
+                <td>{jumlah}</td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <td>{items.length}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </section>
   )
 }
