@@ -1,14 +1,14 @@
-# Penilaian akhir oleh dosen. Berjalan otomatis 15 menit setelah tenggat setiap kelas,
-# dan bisa dijalankan manual dari tab Actions.
-# Hasil: artifact "rekap-nilai" (nilai.csv, laporan.md, manifest-bukti.json) dan
-# "arsip-bukti" (git bundle setiap fork pada commit yang dinilai, beserta manifest).
+# Penilaian akhir oleh dosen. Semua kelas dinilai bersamaan secara otomatis pada Senin pagi
+# (setiap fork tetap memakai tenggat kelasnya sendiri), dan bisa dijalankan manual dari tab Actions.
+# Hasil: artifact "rekap-nilai" (nilai.csv, laporan.md, laporan per mahasiswa di mahasiswa/,
+# manifest-bukti.json) dan "arsip-bukti" (git bundle setiap fork pada commit yang dinilai).
 name: Penilaian Ujian Tengah Semester
 
 on:
   schedule:
-    # Waktu UTC. RA: 30 Okt 23.59 WIB, RB: 1 Nov 23.59 WIB. Hapus setelah semester ini selesai.
-    - cron: '15 17 30 10 *'
-    - cron: '15 17 1 11 *'
+    # Minggu 1 Nov 21.00 UTC = Senin 2 Nov 04.00 WIB, setelah tenggat RB (Minggu 23.59 WIB).
+    # Hasil siap jauh sebelum pukul 07.00. Hapus setelah semester ini selesai.
+    - cron: '0 21 1 11 *'
   workflow_dispatch:
     inputs:
       repo:

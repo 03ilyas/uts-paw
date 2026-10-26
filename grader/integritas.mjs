@@ -8,7 +8,7 @@ import { join } from 'node:path'
 import { UTS, namaCocok } from './lib.mjs'
 
 const TINGKAT = { ...Object.fromEntries(UTS.integritas.map((i) => [i.id, i.tingkat])), I9: 'tinggi' }
-const indikasi = (id, pesan) => ({ id, tingkat: TINGKAT[id], pesan })
+const indikasi = (id, pesan, lokasi = []) => ({ id, tingkat: TINGKAT[id], pesan, lokasi })
 
 const JEJAK_AI = [
   'CLAUDE.md', 'AGENTS.md', 'GEMINI.md', '.cursorrules', '.cursor', '.claude', '.windsurfrules', '.windsurf',
@@ -40,16 +40,19 @@ function berkasTeks(dir) {
 
 export function cekBerkas(root) {
   const hasil = []
-  const jejak = JEJAK_AI.filter((p) => existsSync(join(root, p)) || existsSync(join(root, 'app', p)))
-  if (jejak.length) hasil.push(indikasi('I1', `ditemukan: ${jejak.join(', ')}`))
+  const jejak = JEJAK_AI.flatMap((p) => [p, `app/${p}`]).filter((p) => existsSync(join(root, p)))
+  if (jejak.length) hasil.push(indikasi('I1', `ditemukan: ${jejak.join(', ')}`, jejak.map((berkas) => ({ berkas }))))
 
   const temuan = []
   for (const p of [...berkasTeks(join(root, 'app')), join(root, 'README.md')].filter(existsSync)) {
-    const isi = readFileSync(p, 'utf8')
-    const pola = FRASA_AI.find((re) => re.test(isi))
-    if (pola) temuan.push(`${p.slice(root.length + 1)}: "${isi.match(pola)[0]}"`)
+    readFileSync(p, 'utf8').split('\n').forEach((baris, i) => {
+      const pola = FRASA_AI.find((re) => re.test(baris))
+      if (pola) temuan.push({ berkas: p.slice(root.length + 1), baris: i + 1, kutipan: baris.match(pola)[0] })
+    })
   }
-  if (temuan.length) hasil.push(indikasi('I3', temuan.slice(0, 3).join('; ')))
+  if (temuan.length) {
+    hasil.push(indikasi('I3', temuan.slice(0, 3).map((t) => `${t.berkas}:${t.baris} "${t.kutipan}"`).join('; '), temuan.slice(0, 10)))
+  }
   return hasil
 }
 
@@ -137,7 +140,11 @@ export function cekPenanda(root, penanda) {
   if (!bukti.length) return []
   const jenis = new Set(bukti.map((b) => b.nama))
   const rincian = bukti.slice(0, 6).map((b) => `${b.lokasi} \`${b.baris}\``).join('; ')
-  return [indikasi('I9', `${jenis.size} dari ${penanda.length} pola tambahan ditemukan: ${rincian}`)]
+  const lokasi = bukti.slice(0, 10).map((b) => {
+    const [berkas, baris] = b.lokasi.split(':')
+    return { berkas, baris: Number(baris) }
+  })
+  return [indikasi('I9', `${jenis.size} dari ${penanda.length} pola tambahan ditemukan: ${rincian}`, lokasi)]
 }
 
 // Ambil isi fork pada commit yang dinilai tanpa menjalankan apa pun dari dalamnya.

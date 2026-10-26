@@ -44,7 +44,7 @@ export default function Rubrik() {
         <h2>Cara nilai dihitung</h2>
         <ol>
           <li>
-            Setelah tenggat, dosen menjalankan workflow penilaian di repo induk. Untuk setiap fork, workflow menentukan kelasmu dari data
+            Semua kelas dinilai bersamaan pada Senin, 2 November 2026 pagi, oleh workflow penilaian di repo induk. Untuk setiap fork, workflow menentukan kelasmu dari data
             kelas, lalu memilih <strong>push terakhir sebelum tenggat kelasmu</strong> berdasarkan catatan waktu GitHub Actions.
           </li>
           <li>

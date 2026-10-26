@@ -99,8 +99,8 @@ export default function Ketentuan() {
 
         <h2>Pengarsipan bukti</h2>
         <p>
-          Setelah tenggat setiap kelas, kode yang dinilai beserta seluruh riwayat commit-nya diarsipkan otomatis di repo induk dan diberi
-          sidik jari SHA-256. Waktu push dicatat oleh server GitHub. Mengubah riwayat, melakukan force push, atau menghapus fork setelah
+          Saat penilaian bersama pada Senin, 2 November 2026 pagi, kode yang dinilai beserta seluruh riwayat commit-nya diarsipkan
+          otomatis di repo induk dan diberi sidik jari SHA-256. Waktu push dicatat oleh server GitHub. Mengubah riwayat, melakukan force push, atau menghapus fork setelah
           tenggat tidak mengubah arsip maupun hasil pemeriksaan.
         </p>
 

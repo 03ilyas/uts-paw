@@ -211,11 +211,17 @@ export async function periksa({ appDir, url, pasang = false, konteks = { daftar:
   // di folder induk dan bisa melewatkan seluruh src.
   const berkasLint = semuaBerkas(join(appDir, 'src'), (n) => /\.[jt]sx?$/.test(n)).map((p) => relative(appDir, p))
   const lint = berkasLint.length
-    ? jalankan('npx', ['oxlint', '-c', join(GRADER, 'oxlintrc.json'), ...berkasLint], appDir)
+    ? jalankan('npx', ['oxlint', '-c', join(GRADER, 'oxlintrc.json'), '--format', 'unix', ...berkasLint], appDir)
     : { ok: false, keluaran: 'tidak ada berkas kode di src' }
+  // Format unix: "src/App.jsx:12:5: pesan [Error/aturan]". Hanya error yang membuat B2 gagal.
+  const galatLint = [...lint.keluaran.matchAll(/^(.+?):(\d+):\d+: (.*) \[Error\/[^\]]+\]$/gm)].map((m) => ({
+    berkas: `app/${m[1]}`,
+    baris: Number(m[2]),
+    pesan: m[3],
+  }))
   catat({
     B1: [build.ok, build.ok ? '' : build.keluaran.trim().split('\n').slice(-3).join(' ')],
-    B2: [lint.ok, lint.ok ? '' : (lint.keluaran.match(/Found .*/)?.[0] ?? 'oxlint melaporkan error')],
+    B2: [lint.ok, lint.ok ? '' : `${galatLint.length || 'beberapa'} error lint${galatLint[0] ? `, misalnya: ${galatLint[0].pesan}` : ''}`, galatLint.slice(0, 10)],
   })
 
   catat(cekStatis(appDir))
@@ -225,8 +231,8 @@ export async function periksa({ appDir, url, pasang = false, konteks = { daftar:
 
   const rincian = UTS.rubrik.flatMap((k) =>
     k.butir.map((b) => {
-      const [lulus, catatan] = butir[b.id] ?? [false, 'tidak diperiksa']
-      return { id: b.id, kelompok: k.kode, uraian: b.uraian, bobot: b.bobot, lulus, skor: lulus ? b.bobot : 0, catatan }
+      const [lulus, catatan, lokasi = []] = butir[b.id] ?? [false, 'tidak diperiksa']
+      return { id: b.id, kelompok: k.kode, uraian: b.uraian, bobot: b.bobot, lulus, skor: lulus ? b.bobot : 0, catatan, lokasi }
     }),
   )
   return {

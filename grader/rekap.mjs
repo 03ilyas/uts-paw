@@ -98,15 +98,57 @@ const teksManifest = JSON.stringify(manifest, null, 2) + '\n'
 writeFileSync(join(keluar, 'manifest-bukti.json'), teksManifest)
 const sidikManifest = createHash('sha256').update(teksManifest).digest('hex')
 
+// Laporan per mahasiswa: butir yang belum lulus beserta catatannya, dan tautan ke baris kode
+// pada commit yang dinilai (permalink GitHub, tetap valid walau fork diubah setelahnya).
+const tautan = (h, { berkas, baris }) =>
+  `[${berkas}${baris ? `:${baris}` : ''}](https://github.com/${h.repo}/blob/${h.sha}/${berkas}${baris ? `#L${baris}` : ''})`
+const daftarLokasi = (h, lokasi = []) => (h.sha && lokasi.length ? ` Lokasi: ${lokasi.map((l) => tautan(h, l)).join(', ')}` : '')
+const namaBerkas = (h) => `${h.mahasiswa?.nim || 'tanpa-nim'}-${h.repo.split('/')[0]}.md`
+
+mkdirSync(join(keluar, 'mahasiswa'), { recursive: true })
+for (const h of semua) {
+  const rincian = h.rincian ?? []
+  const belum = rincian.filter((r) => !r.lulus)
+  const teks = [
+    `# Hasil ${UTS.judul} ${UTS.mataKuliah}`,
+    '',
+    `**${h.mahasiswa?.nama || '-'}** (${h.mahasiswa?.nim || '-'}), kelas ${h.kelas || '-'}, tema ${h.tema || '-'}`,
+    '',
+    `- Repo: https://github.com/${h.repo}`,
+    h.sha ? `- Commit yang dinilai: [${h.sha.slice(0, 7)}](https://github.com/${h.repo}/commit/${h.sha}), push ${h.waktu ?? '-'} (${h.bukti ?? '-'})` : `- Commit yang dinilai: ${h.catatan ?? 'tidak ada'}`,
+    h.url ? `- Situs: ${h.url}` : '',
+    '',
+    `## Nilai: ${h.total ?? 0}/100`,
+    '',
+    '| Butir | Kriteria | Skor |',
+    '|---|---|---|',
+    ...rincian.map((r) => `| ${r.id} | ${r.uraian} | ${r.skor}/${r.bobot} |`),
+    '',
+    '## Butir yang belum lulus',
+    '',
+    belum.length
+      ? belum.map((r) => `- **${r.id}** (${r.skor}/${r.bobot}) ${r.uraian}. Catatan: ${(r.catatan || '-').replace(/\.$/, '')}.${daftarLokasi(h, r.lokasi)}`).join('\n')
+      : 'Semua butir lulus.',
+    '',
+    '## Catatan integritas (untuk klarifikasi)',
+    '',
+    h.integritas.length
+      ? h.integritas.map((i) => `- **${i.id}** (${i.tingkat}): ${i.pesan}${daftarLokasi(h, i.lokasi)}`).join('\n')
+      : 'Tidak ada indikasi.',
+    '',
+  ]
+  writeFileSync(join(keluar, 'mahasiswa', namaBerkas(h)), teks.filter((b) => b !== null).join('\n'))
+}
+
 const jadwal = Object.entries(UTS.kelas).map(([k, j]) => `${k} ${j.dibuka} s.d. ${j.tenggat}`).join('; ')
 const md = [
   `# Rekap Nilai ${UTS.judul} ${UTS.mataKuliah}`,
   '',
   `Jadwal: ${jadwal}. Jumlah fork dinilai: ${semua.length}.`,
   '',
-  '| NIM | Nama | Kelas | Terdaftar | Total | Indikasi | Repo | Catatan |',
+  '| NIM | Nama | Kelas | Terdaftar | Total | Indikasi | Laporan | Catatan |',
   '|---|---|---|---|---|---|---|---|',
-  ...rows.map((r) => `| ${r[0] ?? '-'} | ${r[1] ?? '-'} | ${r[2] ?? '-'} | ${r[3] || '-'} | ${r[11]} | ${r.at(-2) || '-'} | ${r[5]} | ${r.at(-1)} |`),
+  ...rows.map((r, i) => `| ${r[0] ?? '-'} | ${r[1] ?? '-'} | ${r[2] ?? '-'} | ${r[3] || '-'} | ${r[11]} | ${r.at(-2) || '-'} | [${namaBerkas(semua[i])}](mahasiswa/${namaBerkas(semua[i])}) | ${r.at(-1)} |`),
   '',
   '## Indikasi integritas',
   '',
