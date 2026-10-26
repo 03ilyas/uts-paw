@@ -97,6 +97,13 @@ export default function Ketentuan() {
           <li>Pasangan dengan kemiripan kode tinggi sama-sama diklarifikasi; pemberi kode juga melanggar.</li>
         </ol>
 
+        <h2>Pengarsipan bukti</h2>
+        <p>
+          Setelah tenggat setiap kelas, kode yang dinilai beserta seluruh riwayat commit-nya diarsipkan otomatis di repo induk dan diberi
+          sidik jari SHA-256. Waktu push dicatat oleh server GitHub. Mengubah riwayat, melakukan force push, atau menghapus fork setelah
+          tenggat tidak mengubah arsip maupun hasil pemeriksaan.
+        </p>
+
         <h2>Agar tidak terindikasi keliru</h2>
         <ul>
           <li>Commit sedikit demi sedikit sejak awal dengan pesan yang menjelaskan perubahan. Hindari satu commit berisi seluruh aplikasi.</li>

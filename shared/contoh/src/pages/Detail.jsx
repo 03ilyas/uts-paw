@@ -35,10 +35,12 @@ export default function Detail() {
         <dt>Prioritas</dt>
         <dd>{item.prioritas}</dd>
       </dl>
-      <button type="button" onClick={konfirmasiHapus}>
-        Hapus
-      </button>
-      <Link to="/koleksi">Kembali</Link>
+      <div className="aksi">
+        <button type="button" onClick={konfirmasiHapus}>
+          Hapus
+        </button>
+        <Link to="/koleksi">Kembali</Link>
+      </div>
     </section>
   )
 }

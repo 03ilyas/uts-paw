@@ -11,14 +11,16 @@ function barisBaru(sebelum, sesudah) {
     .flatMap((b, i) => (b.trim() && !lama.has(b.trim()) ? [i + 1] : []))
 }
 
-export default function Tutorial({ pengantar, hasil, langkah, penutup }) {
+export default function Tutorial({ pengantar, hasil, judulHasil = 'Tampilan jadinya', langkah, penutup }) {
   return (
     <div className="tutorial">
-      <div className="tutorial-pengantar">{pengantar}</div>
+      {pengantar && <div className="tutorial-pengantar">{pengantar}</div>}
 
-      <Card title="Hasil akhir yang akan kamu buat" variant="outlined" className="kartu-hasil">
-        {hasil}
-      </Card>
+      {hasil && (
+        <Card title={judulHasil} variant="outlined" className="kartu-hasil">
+          {hasil}
+        </Card>
+      )}
 
       {langkah.map((l, i) => (
         <section key={l.judul} className="langkah-tutorial">

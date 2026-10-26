@@ -39,10 +39,13 @@ const HALAMAN = [
   { rute: '*', nama: 'Halaman 404', isi: 'Teks "404" dan tautan kembali ke beranda.' },
 ]
 
+const PANDUAN = { '/': 'beranda', '/koleksi': 'koleksi', '/koleksi/:id': 'detail', '/tambah': 'tambah', '/statistik': 'statistik', '/tentang': 'tentang', '*': '404' }
+
 const kolomHalaman = [
   { title: 'Rute', dataIndex: 'rute', width: 130, render: (v) => <code>{v}</code> },
   { title: 'Halaman', dataIndex: 'nama', width: 140 },
   { title: 'Isi minimal', dataIndex: 'isi' },
+  { title: 'Cara membuat', key: 'panduan', width: 120, render: (_, r) => <Link to={`/contoh?halaman=${PANDUAN[r.rute]}`}>Lihat panduan</Link> },
 ]
 
 export default function Soal() {
@@ -113,7 +116,10 @@ export default function Soal() {
           <Table rowKey="digit" size="middle" pagination={false} columns={kolomTema} dataSource={UTS.tema} scroll={{ x: 560 }} />
 
           <h2 id="aplikasi">Spesifikasi aplikasi</h2>
-          <p>Aplikasi minimal terdiri dari tujuh rute berikut, dengan navigasi yang tampil di semua halaman.</p>
+          <p>
+            Aplikasi minimal terdiri dari tujuh rute berikut, dengan navigasi yang tampil di semua halaman. Setiap halaman punya panduan
+            langkah demi langkah; mulai dari <Link to="/contoh?halaman=fondasi">Fondasi</Link>.
+          </p>
           <Table rowKey="rute" size="middle" pagination={false} columns={kolomHalaman} dataSource={HALAMAN} scroll={{ x: 560 }} />
 
           <h3>Data dan penyimpanan</h3>
@@ -171,7 +177,7 @@ export default function Soal() {
               memakai <code>role="alert"</code>. Tulis validasi sendiri di JavaScript; atribut <code>required</code>{' '}
               saja tidak cukup karena pesannya berupa popup browser. Hanya Judul yang wajib diisi, field lain boleh punya
               nilai bawaan. Setelah disimpan, arahkan ke <code>/koleksi</code>. Ikuti{' '}
-              <Link to="/contoh?tab=form">tutorial form langkah demi langkah</Link>.
+              <Link to="/contoh?halaman=tambah">panduan halaman Tambah</Link>.
             </li>
             <li>
               Halaman detail punya tombol bertuliskan <strong>Hapus</strong>. Konfirmasi memakai{' '}
@@ -185,7 +191,7 @@ export default function Soal() {
             <li>Halaman 404 memuat teks <strong>404</strong>.</li>
             <li>
               Halaman <code>/statistik</code> memakai elemen <code>&lt;table&gt;</code>. Ikuti{' '}
-              <Link to="/contoh?tab=tabel">tutorial tabel langkah demi langkah</Link>.
+              <Link to="/contoh?halaman=statistik">panduan halaman Statistik</Link>.
             </li>
             <li>Halaman <code>/tentang</code> menampilkan nama dan NIM persis seperti di <code>app/mahasiswa.json</code>.</li>
             <li>

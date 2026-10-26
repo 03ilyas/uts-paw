@@ -11,6 +11,7 @@
 // dipakai workflow nilai.yml agar kode mahasiswa tidak pernah dijalankan bersama token),
 // --daftar-kelas <berkas> (data kelas; di CI dibaca dari secret DAFTAR_KELAS).
 import { spawnSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { appendFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, join, relative, resolve } from 'node:path'
@@ -335,6 +336,19 @@ async function targetPenilaian(repo, daftarKelas) {
   }
 }
 
+// Arsip bukti: seluruh riwayat fork sampai commit yang dinilai, dalam satu berkas git bundle,
+// beserta SHA-256-nya. Dibuat sebelum kode mahasiswa dijalankan, jadi isinya tidak bisa
+// diubah oleh skrip di repo mahasiswa, dan perubahan apa pun setelahnya mengubah sidik jarinya.
+export function buatArsip(dir, repo, sha, folder) {
+  mkdirSync(folder, { recursive: true })
+  const berkas = `${repo.replace('/', '__')}.bundle`
+  jalankan('git', ['branch', '-f', 'dinilai', sha], dir)
+  const r = jalankan('git', ['bundle', 'create', join(folder, berkas), 'dinilai'], dir)
+  if (!r.ok) return { galat: r.keluaran.trim().split('\n').at(-1) }
+  const isi = readFileSync(join(folder, berkas))
+  return { berkas, sha256: createHash('sha256').update(isi).digest('hex'), ukuran: isi.length }
+}
+
 async function periksaRepo(repo, outDir, targetFile, daftarKelas) {
   const { target, ...konteks } = targetFile ? JSON.parse(readFileSync(targetFile, 'utf8')) : await targetPenilaian(repo, daftarKelas)
   const dasar = { repo, pushTerakhir: konteks.pushTerakhir, tenggat: konteks.tenggat }
@@ -345,7 +359,8 @@ async function periksaRepo(repo, outDir, targetFile, daftarKelas) {
     const dir = mkdtempSync(join(tmpdir(), 'uts-fork-'))
     jalankan('git', ['clone', '--quiet', `https://github.com/${repo}.git`, dir])
     jalankan('git', ['checkout', '--quiet', target.sha], dir)
-    hasil = { ...dasar, ...target, ...(await periksa({ appDir: join(dir, 'app'), url: urlPages(repo), pasang: true, konteks: { ...konteks, sha: target.sha } })) }
+    const arsip = outDir ? buatArsip(dir, repo, target.sha, join(outDir, 'arsip')) : undefined
+    hasil = { ...dasar, ...target, arsip, ...(await periksa({ appDir: join(dir, 'app'), url: urlPages(repo), pasang: true, konteks: { ...konteks, sha: target.sha } })) }
     rmSync(dir, { recursive: true, force: true })
   }
   if (outDir) {

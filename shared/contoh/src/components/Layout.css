@@ -28,6 +28,34 @@
   padding: 1.5rem;
 }
 
+.kaki {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #dcdcdc;
+  color: #57606a;
+  font-size: 0.9rem;
+}
+
+.aksi {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.isi dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+}
+
+.isi dt {
+  font-weight: 600;
+}
+
+.isi dd {
+  margin: 0;
+}
+
 .daftar-kartu {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

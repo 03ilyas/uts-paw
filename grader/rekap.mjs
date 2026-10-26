@@ -2,6 +2,7 @@
 // Menggabungkan hasil per fork menjadi nilai.csv dan laporan.md, lalu menambahkan
 // indikasi yang hanya terlihat lintas fork (NIM ganda, kemiripan kode).
 //   node grader/rekap.mjs <folder-hasil> [folder-keluaran]
+import { createHash } from 'node:crypto'
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -75,6 +76,28 @@ const berindikasi = semua
   .filter((h) => h.integritas.length)
   .sort((a, b) => Math.min(...a.integritas.map((i) => URUTAN_TINGKAT[i.tingkat])) - Math.min(...b.integritas.map((i) => URUTAN_TINGKAT[i.tingkat])))
 
+// Manifest bukti: satu baris per fork, berisi commit yang dinilai, waktu push menurut server
+// GitHub, sidik jari arsip, dan indikasi. Sidik jari manifest dicetak di ringkasan Actions repo
+// induk, yang tidak bisa diubah mahasiswa.
+const manifest = {
+  dibuat: new Date().toISOString(),
+  repoInduk: UTS.repoInduk,
+  fork: semua.map((h) => ({
+    repo: h.repo,
+    nim: h.mahasiswa?.nim ?? null,
+    kelas: h.kelas ?? null,
+    commit: h.sha ?? null,
+    waktuPush: h.waktu ?? null,
+    buktiWaktu: h.bukti ?? null,
+    tenggat: h.tenggat ?? null,
+    arsip: h.arsip ?? null,
+    integritas: h.integritas,
+  })),
+}
+const teksManifest = JSON.stringify(manifest, null, 2) + '\n'
+writeFileSync(join(keluar, 'manifest-bukti.json'), teksManifest)
+const sidikManifest = createHash('sha256').update(teksManifest).digest('hex')
+
 const jadwal = Object.entries(UTS.kelas).map(([k, j]) => `${k} ${j.dibuka} s.d. ${j.tenggat}`).join('; ')
 const md = [
   `# Rekap Nilai ${UTS.judul} ${UTS.mataKuliah}`,
@@ -90,6 +113,10 @@ const md = [
   berindikasi.length
     ? berindikasi.map((h) => `### ${label(h)}, ${h.repo}\n\n${h.integritas.map((i) => `- **${i.id}** (${i.tingkat}): ${i.pesan}`).join('\n')}`).join('\n\n')
     : 'Tidak ada.',
+  '',
+  '## Arsip bukti',
+  '',
+  `Kode setiap fork pada commit yang dinilai diarsipkan sebagai git bundle (artifact \`arsip-bukti\`). Sidik jari SHA-256 manifest: \`${sidikManifest}\`.`,
   '',
   'Indikasi bukan bukti. Sesuai kontrak kuliah, nilai 0 hanya diberikan bila mencontek atau kerja sama terbukti; mintalah demo atau penjelasan lisan sebelum memutuskan.',
 ].join('\n')

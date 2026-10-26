@@ -1,7 +1,3 @@
-import { Alert } from 'antd'
-import Tutorial from '../components/Tutorial.jsx'
-import Kode from '../components/Kode.jsx'
-import { DemoForm } from '../components/Demo.jsx'
 import { isi } from '../contoh.js'
 
 const LOKASI = 'src/pages/Tambah.jsx'
@@ -12,13 +8,13 @@ const RUTE = `import Tambah from './pages/Tambah.jsx'
 // di dalam <Routes> pada App.jsx:
 <Route path="/tambah" element={<Tambah />} />`
 
-const LANGKAH = [
+export const LANGKAH_TAMBAH = [
   {
-    judul: 'Buat halaman kosong dan daftarkan rutenya',
+    judul: 'Buat halaman kosong dan pastikan rutenya terdaftar',
     tujuan: 'Pastikan alamat /tambah sudah menampilkan halamanmu sebelum mulai membuat form.',
     kode: [
       { label: LOKASI, isi: l('1-kerangka.jsx') },
-      { label: 'src/App.jsx (tambahkan dua baris ini)', isi: RUTE, sorotOtomatis: false },
+      { label: 'src/App.jsx (sudah ada bila mengikuti Fondasi langkah 6; pastikan dua baris ini ada)', isi: RUTE, sorotOtomatis: false },
     ],
     penjelasan: ['Satu berkas = satu komponen halaman. Nama fungsi diawali huruf besar (Tambah), sama dengan nama berkasnya.'],
     cek: ['Jalankan npm run dev, buka http://localhost:5173/tambah.', 'Tulisan "Tambah Tugas" tampil.'],
@@ -131,32 +127,3 @@ const LANGKAH = [
   },
 ]
 
-export default function TutorialForm() {
-  return (
-    <Tutorial
-      pengantar={
-        <p>
-          Kita membangun halaman <code>/tambah</code> dalam enam langkah kecil. Setiap langkah bisa dijalankan dan dicek di browser sebelum
-          lanjut. Baris yang <span className="tanda-sorot">disorot emas</span> adalah baris yang baru ditambahkan di langkah itu. Contoh memakai
-          tema Daftar Tugas; field-nya kamu ganti dengan field temamu.
-        </p>
-      }
-      hasil={<DemoForm />}
-      langkah={LANGKAH}
-      penutup={
-        <Alert
-          type="info"
-          showIcon
-          title="Terakhir: cek dengan pemeriksa"
-          description={
-            <>
-              Jalankan perintah ini di folder <code>app/</code>. Butir <strong>C7</strong> (validasi) dan <strong>C8</strong> (simpan) harus
-              LULUS.
-              <Kode label="Terminal, di folder app/">npm run cek</Kode>
-            </>
-          }
-        />
-      }
-    />
-  )
-}

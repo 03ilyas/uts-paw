@@ -2,8 +2,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { Alert, Anchor, Tabs, Tag } from 'antd'
 import KepalaHalaman from '../components/KepalaHalaman.jsx'
 import Kode from '../components/Kode.jsx'
-import TutorialForm from './TutorialForm.jsx'
-import TutorialTabel from './TutorialTabel.jsx'
+import PanduanHalaman from '../halaman/PanduanHalaman.jsx'
 import { isi } from '../contoh.js'
 
 const BAGIAN = [
@@ -216,20 +215,19 @@ function SemuaContoh() {
 }
 
 const TAB = [
-  { key: 'form', label: 'Tutorial: Form', children: <TutorialForm /> },
-  { key: 'tabel', label: 'Tutorial: Tabel', children: <TutorialTabel /> },
+  { key: 'halaman', label: 'Panduan 7 halaman', children: <PanduanHalaman /> },
   { key: 'semua', label: 'Semua contoh kode', children: <SemuaContoh /> },
 ]
 
 export default function Contoh() {
   const [params, setParams] = useSearchParams()
-  const aktif = TAB.some((t) => t.key === params.get('tab')) ? params.get('tab') : 'form'
+  const aktif = params.get('tab') === 'semua' ? 'semua' : 'halaman'
 
   return (
     <>
       <KepalaHalaman kicker="Contoh Kode" judul="Contoh untuk setiap kode yang diminta">
-        Mulai dari tutorial langkah demi langkah untuk form dan tabel, lalu lihat contoh lengkap setiap kode yang diminta. Semua contoh
-        memakai tema Daftar Tugas dan sudah lulus uji otomatis dosen.
+        Panduan langkah demi langkah untuk ketujuh halaman wajib: apa isinya, seperti apa tampilannya, dan bagaimana membuatnya. Kerjakan
+        bagian Fondasi dulu, lalu halaman 1 sampai 7 berurutan. Contoh memakai tema Daftar Tugas; ganti dengan tema sesuai NIM-mu.
       </KepalaHalaman>
       <Tabs activeKey={aktif} onChange={(key) => setParams({ tab: key })} items={TAB} size="large" />
     </>

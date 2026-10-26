@@ -1,7 +1,4 @@
-import { Alert, Table } from 'antd'
-import Tutorial from '../components/Tutorial.jsx'
-import Kode from '../components/Kode.jsx'
-import { DemoTabel } from '../components/Demo.jsx'
+import { Table } from 'antd'
 import { isi } from '../contoh.js'
 
 const LOKASI = 'src/pages/Statistik.jsx'
@@ -33,13 +30,13 @@ const tabelKecil = (kolom, data) => (
   <Table size="small" pagination={false} rowKey={(r) => Object.values(r)[0]} columns={kolom} dataSource={data} style={{ margin: '12px 0 20px', maxWidth: 640 }} />
 )
 
-const LANGKAH = [
+export const LANGKAH_STATISTIK = [
   {
-    judul: 'Buat halaman kosong dan daftarkan rutenya',
+    judul: 'Buat halaman kosong dan pastikan rutenya terdaftar',
     tujuan: 'Pastikan alamat /statistik sudah menampilkan halamanmu.',
     kode: [
       { label: LOKASI, isi: l('1-kerangka.jsx') },
-      { label: 'src/App.jsx (tambahkan dua baris ini)', isi: RUTE, sorotOtomatis: false },
+      { label: 'src/App.jsx (sudah ada bila mengikuti Fondasi langkah 6; pastikan dua baris ini ada)', isi: RUTE, sorotOtomatis: false },
     ],
     cek: ['Buka http://localhost:5173/statistik.', 'Tulisan "Statistik" tampil.'],
   },
@@ -132,31 +129,3 @@ const LANGKAH = [
   },
 ]
 
-export default function TutorialTabel() {
-  return (
-    <Tutorial
-      pengantar={
-        <p>
-          Kita membangun halaman <code>/statistik</code> dalam lima langkah: dari tabel HTML dengan angka tetap sampai tabel yang dihitung
-          otomatis dari data. Baris yang <span className="tanda-sorot">disorot emas</span> adalah baris yang baru di langkah itu.
-        </p>
-      }
-      hasil={<DemoTabel />}
-      langkah={LANGKAH}
-      penutup={
-        <Alert
-          type="info"
-          showIcon
-          title="Terakhir: cek dengan pemeriksa"
-          description={
-            <>
-              Jalankan perintah ini di folder <code>app/</code>. Butir <strong>C10</strong> (tabel statistik) harus LULUS, dan{' '}
-              <strong>E2</strong> ikut terbantu oleh <code>@media</code> di CSS-nya.
-              <Kode label="Terminal, di folder app/">npm run cek</Kode>
-            </>
-          }
-        />
-      }
-    />
-  )
-}
