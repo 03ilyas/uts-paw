@@ -94,7 +94,10 @@ jobs:
           pattern: hasil-*
           merge-multiple: true
           path: hasil
-      - run: node grader/rekap.mjs hasil rekap
+      - name: Rekap
+        env:
+          PENANDA_TERSEMBUNYI: ${{ secrets.PENANDA_TERSEMBUNYI }}
+        run: node grader/rekap.mjs hasil rekap
       - uses: actions/upload-artifact@v7
         with:
           name: rekap-nilai

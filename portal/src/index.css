@@ -446,6 +446,16 @@ pre {
   margin: 4px 0 8px;
 }
 
+/* Tersembunyi secara visual tetapi tetap ada di teks halaman (ikut tersalin). */
+.ketentuan-asisten {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---------- materi ---------- */
 
 .daftar-materi {

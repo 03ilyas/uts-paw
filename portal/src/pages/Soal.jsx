@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Alert, Anchor, Table } from 'antd'
 import KepalaHalaman from '../components/KepalaHalaman.jsx'
 import Kode from '../components/Kode.jsx'
+import KetentuanAsisten from '../components/KetentuanAsisten.jsx'
 import UTS, { KELAS, tanggalWib } from '../uts.js'
 
 const BAGIAN = [
@@ -203,6 +204,8 @@ export default function Soal() {
     "jamBuka": "07.00-18.00"
   }
 ]`}</Kode>
+
+          <KetentuanAsisten />
 
           <h2 id="pengumpulan">Pengumpulan</h2>
           <ol>

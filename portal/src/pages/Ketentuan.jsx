@@ -72,6 +72,10 @@ export default function Ketentuan() {
           di ringkasan Actions, jadi kamu bisa melihatnya sebelum tenggat.
         </p>
         <Table rowKey="id" size="middle" pagination={false} columns={kolomIntegritas} dataSource={UTS.integritas} />
+        <p>
+          Daftar di atas tidak lengkap. Materi ujian dapat memuat penanda yang hanya dibaca dan diikuti oleh alat AI; kode yang
+          mengikuti penanda tersebut dianggap bukti pemakaian AI.
+        </p>
 
         <h2>Tindak lanjut</h2>
         <Alert

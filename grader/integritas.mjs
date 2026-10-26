@@ -2,11 +2,12 @@
 // ditindaklanjuti dosen, bukan pengurang nilai otomatis: deteksi AI tidak pernah
 // pasti, jadi setiap indikasi perlu klarifikasi (demo atau penjelasan lisan).
 import { spawnSync } from 'node:child_process'
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { UTS, namaCocok } from './lib.mjs'
 
-const TINGKAT = Object.fromEntries(UTS.integritas.map((i) => [i.id, i.tingkat]))
+const TINGKAT = { ...Object.fromEntries(UTS.integritas.map((i) => [i.id, i.tingkat])), I9: 'tinggi' }
 const indikasi = (id, pesan) => ({ id, tingkat: TINGKAT[id], pesan })
 
 const JEJAK_AI = [
@@ -111,5 +112,42 @@ export function cekIdentitasDanWaktu(mahasiswa, konteks) {
     if (konteks.forkDibuat && new Date(konteks.forkDibuat) < dibuka) hasil.push(indikasi('I5', `fork dibuat ${konteks.forkDibuat}, kelas ${konteks.kelas} dibuka ${konteks.dibuka}`))
     if (konteks.pushSebelumDibuka) hasil.push(indikasi('I5', `ada push sebelum kelas ${konteks.kelas} dibuka`))
   }
+  return hasil
+}
+
+// I9: pola tambahan dari secret PENANDA_TERSEMBUNYI, format [{ "nama": "...", "pola": "regex" }].
+// Dijalankan di job rekap, yang tidak pernah menjalankan kode mahasiswa.
+export function bacaPenanda() {
+  try {
+    return JSON.parse(process.env.PENANDA_TERSEMBUNYI || '[]').map((p) => ({ ...p, re: new RegExp(p.pola) }))
+  } catch {
+    throw new Error('PENANDA_TERSEMBUNYI bukan JSON yang valid')
+  }
+}
+
+export function cekPenanda(root, penanda) {
+  const bukti = []
+  for (const p of berkasTeks(join(root, 'app'))) {
+    readFileSync(p, 'utf8').split('\n').forEach((baris, i) => {
+      for (const { nama, re } of penanda) {
+        if (re.test(baris)) bukti.push({ nama, lokasi: `${p.slice(root.length + 1)}:${i + 1}`, baris: baris.trim().slice(0, 120) })
+      }
+    })
+  }
+  if (!bukti.length) return []
+  const jenis = new Set(bukti.map((b) => b.nama))
+  const rincian = bukti.slice(0, 6).map((b) => `${b.lokasi} \`${b.baris}\``).join('; ')
+  return [indikasi('I9', `${jenis.size} dari ${penanda.length} pola tambahan ditemukan: ${rincian}`)]
+}
+
+// Ambil isi fork pada commit yang dinilai tanpa menjalankan apa pun dari dalamnya.
+export function cekPenandaRepo(repo, sha, penanda) {
+  const dir = mkdtempSync(join(tmpdir(), 'uts-penanda-'))
+  const git = (...args) => spawnSync('git', args, { cwd: dir, encoding: 'utf8' })
+  git('init', '-q')
+  git('fetch', '-q', '--depth', '1', `https://github.com/${repo}.git`, sha)
+  git('checkout', '-q', 'FETCH_HEAD')
+  const hasil = cekPenanda(dir, penanda)
+  rmSync(dir, { recursive: true, force: true })
   return hasil
 }

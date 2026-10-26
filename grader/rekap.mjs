@@ -5,6 +5,7 @@
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { bacaPenanda, cekPenandaRepo } from './integritas.mjs'
 import { UTS } from './lib.mjs'
 import { sidikJari } from './periksa.mjs'
 
@@ -26,6 +27,12 @@ const perNim = Object.groupBy(semua.filter((h) => h.mahasiswa?.nim), (h) => h.ma
 for (const [nim, grup] of Object.entries(perNim)) {
   if (grup.length < 2) continue
   for (const h of grup) h.integritas.push({ id: 'I6', tingkat: 'tinggi', pesan: `NIM ${nim} juga dipakai oleh ${grup.filter((x) => x !== h).map((x) => x.repo).join(', ')}` })
+}
+
+// I9: pola tambahan, diperiksa ulang dari GitHub pada commit yang dinilai.
+const penanda = bacaPenanda()
+if (penanda.length) {
+  for (const h of semua.filter((x) => x.sha)) h.integritas.push(...cekPenandaRepo(h.repo, h.sha, penanda))
 }
 
 // I7: kemiripan Jaccard antar sidik jari, setelah token starter dan contoh resmi dibuang

@@ -91,11 +91,28 @@ git push`}</Kode>
   {
     title: 'Verifikasi deployment',
     content: (
-      <p>
-        Buka <code>https://USERNAME.github.io/uts-paw/</code>. Coba pindah halaman lalu tekan refresh di{' '}
-        <code>/koleksi</code>; halaman harus tetap tampil. Tulis URL ini di README, lalu pastikan namamu muncul di halaman
-        Pengumpulan.
-      </p>
+      <>
+        <p>
+          Buka <code>https://USERNAME.github.io/uts-paw/</code> (username GitHub kamu, huruf kecil semua). Coba pindah halaman
+          lalu tekan refresh di <code>/koleksi</code>; halaman harus tetap tampil. Tulis URL ini di README, lalu pastikan
+          namamu muncul di halaman Pengumpulan.
+        </p>
+        <p>Lupa alamatnya? Cari di repo fork kamu:</p>
+        <ul>
+          <li>
+            <strong>Settings → Pages</strong>: tertulis di bagian atas, <em>Your site is live at ...</em>
+          </li>
+          <li>
+            Tab <strong>Actions</strong> → run <strong>UTS</strong> terakhir → job <strong>deploy</strong>: alamatnya tampil di bawah
+            nama job.
+          </li>
+          <li>
+            Halaman depan fork → ikon gerigi di bagian <strong>About</strong> → centang{' '}
+            <strong>Use your GitHub Pages website</strong> → <strong>Save changes</strong>. Setelah itu alamatnya selalu tampil di
+            sisi kanan halaman repo.
+          </li>
+        </ul>
+      </>
     ),
   },
 ]
