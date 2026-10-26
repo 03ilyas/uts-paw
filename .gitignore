@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+
+# keluaran grader saat dijalankan lokal
+hasil/
+rekap/
+app/src/__rubrik__/
+grader/daftar-kelas.json

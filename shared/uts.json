@@ -1,0 +1,615 @@
+{
+  "mataKuliah": "IF25-22014 Pengembangan Aplikasi Web",
+  "judul": "Ujian Tengah Semester",
+  "semester": "Ganjil 2026/2027",
+  "dosen": "Muhammad Habib Algifari",
+  "repoInduk": "mh4Scripts/uts-paw",
+  "domain": "uts-paw.mhabibalgifari.web.id",
+  "kelas": {
+    "RA": {
+      "dibuka": "2026-10-27T08:00:00+07:00",
+      "tenggat": "2026-10-30T23:59:59+07:00"
+    },
+    "RB": {
+      "dibuka": "2026-10-29T13:00:00+07:00",
+      "tenggat": "2026-11-01T23:59:59+07:00"
+    }
+  },
+  "minimalItem": 10,
+  "tema": [
+    {
+      "digit": 0,
+      "nama": "Rak Buku Pribadi",
+      "entitas": "buku",
+      "contohKategori": [
+        "Novel",
+        "Teknologi",
+        "Sejarah",
+        "Komik"
+      ],
+      "field": [
+        {
+          "kunci": "penulis",
+          "label": "Penulis",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "tahunTerbit",
+          "label": "Tahun Terbit",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "status",
+          "label": "Status",
+          "tipe": "teks",
+          "contoh": "dimiliki / sedang dibaca / ingin dibeli"
+        }
+      ]
+    },
+    {
+      "digit": 1,
+      "nama": "Resep Masakan Nusantara",
+      "entitas": "resep",
+      "contohKategori": [
+        "Makanan Utama",
+        "Kudapan",
+        "Minuman",
+        "Sambal"
+      ],
+      "field": [
+        {
+          "kunci": "daerahAsal",
+          "label": "Daerah Asal",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "waktuMasak",
+          "label": "Waktu Masak (menit)",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "tingkatKesulitan",
+          "label": "Tingkat Kesulitan",
+          "tipe": "teks",
+          "contoh": "mudah / sedang / sulit"
+        }
+      ]
+    },
+    {
+      "digit": 2,
+      "nama": "Agenda Kegiatan Kampus",
+      "entitas": "kegiatan",
+      "contohKategori": [
+        "Seminar",
+        "Lomba",
+        "Organisasi",
+        "Olahraga"
+      ],
+      "field": [
+        {
+          "kunci": "tanggal",
+          "label": "Tanggal",
+          "tipe": "tanggal"
+        },
+        {
+          "kunci": "lokasi",
+          "label": "Lokasi",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "penyelenggara",
+          "label": "Penyelenggara",
+          "tipe": "teks"
+        }
+      ]
+    },
+    {
+      "digit": 3,
+      "nama": "Inventaris Laboratorium",
+      "entitas": "alat",
+      "contohKategori": [
+        "Komputer",
+        "Jaringan",
+        "Elektronika",
+        "Alat Ukur"
+      ],
+      "field": [
+        {
+          "kunci": "kodeAlat",
+          "label": "Kode Alat",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "jumlah",
+          "label": "Jumlah",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "kondisi",
+          "label": "Kondisi",
+          "tipe": "teks",
+          "contoh": "baik / perlu servis / rusak"
+        }
+      ]
+    },
+    {
+      "digit": 4,
+      "nama": "Daftar Tontonan Film dan Serial",
+      "entitas": "tontonan",
+      "contohKategori": [
+        "Drama",
+        "Dokumenter",
+        "Animasi",
+        "Aksi"
+      ],
+      "field": [
+        {
+          "kunci": "sutradara",
+          "label": "Sutradara",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "tahunRilis",
+          "label": "Tahun Rilis",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "rating",
+          "label": "Rating (1-10)",
+          "tipe": "angka"
+        }
+      ]
+    },
+    {
+      "digit": 5,
+      "nama": "Destinasi Wisata Lampung",
+      "entitas": "destinasi",
+      "contohKategori": [
+        "Pantai",
+        "Gunung",
+        "Budaya",
+        "Kuliner"
+      ],
+      "field": [
+        {
+          "kunci": "kabupaten",
+          "label": "Kabupaten/Kota",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "hargaTiket",
+          "label": "Harga Tiket (Rp)",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "jamBuka",
+          "label": "Jam Buka",
+          "tipe": "teks",
+          "contoh": "08.00-17.00"
+        }
+      ]
+    },
+    {
+      "digit": 6,
+      "nama": "Jurnal Latihan Olahraga",
+      "entitas": "sesi latihan",
+      "contohKategori": [
+        "Kardio",
+        "Kekuatan",
+        "Kelenturan",
+        "Permainan"
+      ],
+      "field": [
+        {
+          "kunci": "tanggal",
+          "label": "Tanggal",
+          "tipe": "tanggal"
+        },
+        {
+          "kunci": "durasi",
+          "label": "Durasi (menit)",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "kalori",
+          "label": "Kalori Terbakar",
+          "tipe": "angka"
+        }
+      ]
+    },
+    {
+      "digit": 7,
+      "nama": "Direktori Kuliner Sekitar Kampus",
+      "entitas": "tempat makan",
+      "contohKategori": [
+        "Nasi",
+        "Mi",
+        "Minuman",
+        "Jajanan"
+      ],
+      "field": [
+        {
+          "kunci": "alamat",
+          "label": "Alamat",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "hargaRataRata",
+          "label": "Harga Rata-rata (Rp)",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "jamBuka",
+          "label": "Jam Buka",
+          "tipe": "teks",
+          "contoh": "10.00-21.00"
+        }
+      ]
+    },
+    {
+      "digit": 8,
+      "nama": "Koleksi Tanaman Hias",
+      "entitas": "tanaman",
+      "contohKategori": [
+        "Daun",
+        "Bunga",
+        "Sukulen",
+        "Gantung"
+      ],
+      "field": [
+        {
+          "kunci": "namaLatin",
+          "label": "Nama Latin",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "frekuensiSiram",
+          "label": "Frekuensi Siram",
+          "tipe": "teks",
+          "contoh": "2x seminggu"
+        },
+        {
+          "kunci": "kebutuhanCahaya",
+          "label": "Kebutuhan Cahaya",
+          "tipe": "teks",
+          "contoh": "teduh / sedang / penuh"
+        }
+      ]
+    },
+    {
+      "digit": 9,
+      "nama": "Portofolio Proyek",
+      "entitas": "proyek",
+      "contohKategori": [
+        "Web",
+        "Mobile",
+        "Data",
+        "Desain"
+      ],
+      "field": [
+        {
+          "kunci": "teknologi",
+          "label": "Teknologi",
+          "tipe": "teks"
+        },
+        {
+          "kunci": "tahun",
+          "label": "Tahun",
+          "tipe": "angka"
+        },
+        {
+          "kunci": "tautan",
+          "label": "Tautan",
+          "tipe": "teks"
+        }
+      ]
+    }
+  ],
+  "rubrik": [
+    {
+      "kode": "A",
+      "nama": "Pengumpulan dan Deployment",
+      "materi": "P1",
+      "butir": [
+        {
+          "id": "A1",
+          "bobot": 3,
+          "uraian": "app/mahasiswa.json terisi lengkap dan tema sesuai digit terakhir NIM",
+          "cara": "Membaca berkas dan mencocokkan digit NIM"
+        },
+        {
+          "id": "A2",
+          "bobot": 6,
+          "uraian": "Situs GitHub Pages dapat diakses dan memuat aplikasi React",
+          "cara": "Request HTTP ke URL Pages, mencari elemen #root"
+        },
+        {
+          "id": "A3",
+          "bobot": 3,
+          "uraian": "Refresh di /koleksi tetap memuat aplikasi (fallback 404.html)",
+          "cara": "Request HTTP ke URL Pages + /koleksi"
+        },
+        {
+          "id": "A4",
+          "bobot": 3,
+          "uraian": "README.md berisi nama, NIM, URL deployment, daftar fitur, dan tangkapan layar",
+          "cara": "Pencarian pola di README.md"
+        }
+      ]
+    },
+    {
+      "kode": "B",
+      "nama": "Build dan Kualitas Kode",
+      "materi": "P5-P7",
+      "butir": [
+        {
+          "id": "B1",
+          "bobot": 5,
+          "uraian": "npm ci dan npm run build berhasil tanpa error",
+          "cara": "Menjalankan perintah build"
+        },
+        {
+          "id": "B2",
+          "bobot": 5,
+          "uraian": "npm run lint (oxlint) tanpa error",
+          "cara": "Menjalankan linter"
+        }
+      ]
+    },
+    {
+      "kode": "C",
+      "nama": "Fungsionalitas Aplikasi",
+      "materi": "P7",
+      "butir": [
+        {
+          "id": "C1",
+          "bobot": 4,
+          "uraian": "public/data/koleksi.json berisi minimal 10 item dengan id unik, judul, kategori, dan tiga field tema",
+          "cara": "Validasi skema JSON"
+        },
+        {
+          "id": "C2",
+          "bobot": 2,
+          "uraian": "Halaman / tampil dengan satu judul utama (h1)",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C3",
+          "bobot": 5,
+          "uraian": "Halaman /koleksi mengambil data dengan fetch dan menampilkan semua item",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C4",
+          "bobot": 4,
+          "uraian": "Pencarian berdasarkan judul menyaring daftar",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C5",
+          "bobot": 4,
+          "uraian": "Halaman /koleksi/:id menampilkan detail item",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C6",
+          "bobot": 2,
+          "uraian": "Id yang tidak ada menampilkan pesan \"tidak ditemukan\" di halaman detail (bukan halaman 404 umum)",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C7",
+          "bobot": 4,
+          "uraian": "Form /tambah menolak judul kosong dan menampilkan pesan error (role=\"alert\")",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C8",
+          "bobot": 5,
+          "uraian": "Form /tambah menyimpan item baru ke localStorage dan item muncul di /koleksi",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C9",
+          "bobot": 4,
+          "uraian": "Tombol Hapus di halaman detail menghapus item lalu kembali ke /koleksi",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C10",
+          "bobot": 2,
+          "uraian": "Halaman /statistik menampilkan tabel HTML jumlah item per kategori",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C11",
+          "bobot": 2,
+          "uraian": "Halaman /tentang menampilkan nama dan NIM",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C12",
+          "bobot": 2,
+          "uraian": "Rute yang tidak dikenal menampilkan halaman 404",
+          "cara": "Uji otomatis dosen"
+        }
+      ]
+    },
+    {
+      "kode": "D",
+      "nama": "Konsep React",
+      "materi": "P7",
+      "butir": [
+        {
+          "id": "D1",
+          "bobot": 3,
+          "uraian": "Memakai useState dan useEffect",
+          "cara": "Analisis kode sumber"
+        },
+        {
+          "id": "D2",
+          "bobot": 4,
+          "uraian": "Context API: createContext, Provider, dan useContext",
+          "cara": "Analisis kode sumber"
+        },
+        {
+          "id": "D3",
+          "bobot": 4,
+          "uraian": "Minimal 2 custom hook di src/hooks/ yang benar-benar dipakai",
+          "cara": "Analisis kode sumber"
+        },
+        {
+          "id": "D4",
+          "bobot": 4,
+          "uraian": "React Router: minimal 7 Route, useParams, useNavigate, dan NavLink/Link",
+          "cara": "Analisis kode sumber"
+        },
+        {
+          "id": "D5",
+          "bobot": 3,
+          "uraian": "fetch dengan async/await serta state loading dan error",
+          "cara": "Analisis kode sumber"
+        },
+        {
+          "id": "D6",
+          "bobot": 2,
+          "uraian": "Minimal 5 komponen di src/components/",
+          "cara": "Menghitung berkas komponen"
+        }
+      ]
+    },
+    {
+      "kode": "E",
+      "nama": "HTML, CSS, dan JavaScript",
+      "materi": "P2-P6",
+      "butir": [
+        {
+          "id": "E1",
+          "bobot": 2,
+          "uraian": "Struktur semantik: header, nav, main, footer",
+          "cara": "Uji otomatis dosen (DOM)"
+        },
+        {
+          "id": "E2",
+          "bobot": 3,
+          "uraian": "CSS responsif: minimal satu @media dan tata letak flex atau grid",
+          "cara": "Analisis berkas CSS"
+        },
+        {
+          "id": "E3",
+          "bobot": 2,
+          "uraian": "JavaScript modern: destructuring, spread, template literal, map/filter/reduce",
+          "cara": "Analisis kode sumber"
+        }
+      ]
+    },
+    {
+      "kode": "F",
+      "nama": "Pengujian",
+      "materi": "P7",
+      "butir": [
+        {
+          "id": "F1",
+          "bobot": 4,
+          "uraian": "Minimal 5 test case buatan sendiri (Vitest + Testing Library)",
+          "cara": "Menghitung test() / it()"
+        },
+        {
+          "id": "F2",
+          "bobot": 4,
+          "uraian": "Semua test buatan sendiri lulus (minimal 5 test)",
+          "cara": "Menjalankan npm test"
+        }
+      ]
+    }
+  ],
+  "materi": [
+    {
+      "kode": "P1",
+      "judul": "Bagaimana Aplikasi Web Bekerja",
+      "ringkas": "Klien-server, HTTP, DNS, dan alur request-response.",
+      "slide": "https://drive.google.com/file/d/1fGuWYdfYzUr65F6qM-Tlwp2Or6hUqsPP/view"
+    },
+    {
+      "kode": "P2",
+      "judul": "Mengenal HTML",
+      "ringkas": "Struktur dokumen, elemen semantik, tautan, dan gambar.",
+      "slide": "https://drive.google.com/file/d/1iiVaWYt7NLuuHWjLsFUmZxHksmnYyTk1/view"
+    },
+    {
+      "kode": "P3",
+      "judul": "Mengenal CSS",
+      "ringkas": "Selektor, box model, warna, tipografi, dan kaskade.",
+      "slide": "https://drive.google.com/file/d/1RJl9pF9cqRAr4l1oJH-ExFmHc0BEwe1p/view"
+    },
+    {
+      "kode": "P4",
+      "judul": "Tabel, Formulir, Layout dan Web Media",
+      "ringkas": "Tabel data, form, Flexbox, Grid, dan media query.",
+      "slide": "https://drive.google.com/file/d/1LfwiFQHlLC1HW3PQhbRfhhApWXIJvR-0/view"
+    },
+    {
+      "kode": "P5",
+      "judul": "Dasar-dasar JavaScript",
+      "ringkas": "Variabel, tipe data, fungsi, array, objek, dan DOM.",
+      "slide": "https://drive.google.com/file/d/1A90LeaU1wyXrYKearNEcevLxpT7Q2eRm/view",
+      "praktikum": "https://drive.google.com/file/d/1ggEw0_Q5csVB0yB47LiRnkV5bgcC6DVO/view"
+    },
+    {
+      "kode": "P6",
+      "judul": "The Next Generation JavaScript",
+      "ringkas": "let/const, arrow function, destructuring, spread, modul, Promise, async/await.",
+      "slide": "https://drive.google.com/file/d/1KCAvrIzRM1FZFm7HpBE94dl688Sp-hGK/view",
+      "praktikum": "https://drive.google.com/file/d/174AH3r6uN-C1li2ZNMoxBGWjGpd9Q7aE/view"
+    },
+    {
+      "kode": "P7",
+      "judul": "Kerangka Kerja React JS",
+      "ringkas": "JSX, komponen, props, state, hooks, fetch, React Router, Context API.",
+      "slide": "https://drive.google.com/file/d/1kYcjSR6NdEBGw1SDLWcJdO_yy2jNQn_r/view",
+      "praktikum": "https://drive.google.com/file/d/1-AJ0OTCms0kz9YgB6RWVDr3YK42V_EzK/view"
+    }
+  ],
+  "integritas": [
+    {
+      "id": "I1",
+      "tingkat": "tinggi",
+      "uraian": "Berkas jejak alat AI di repo (CLAUDE.md, AGENTS.md, .cursorrules, .cursor/, .claude/, .github/copilot-instructions.md, dan sejenisnya)"
+    },
+    {
+      "id": "I2",
+      "tingkat": "tinggi",
+      "uraian": "Pesan commit atau trailer Co-authored-by yang menyebut alat AI (Claude, Copilot, Cursor, ChatGPT, Gemini, dan sejenisnya)"
+    },
+    {
+      "id": "I3",
+      "tingkat": "sedang",
+      "uraian": "Teks khas jawaban AI di kode atau README, misalnya \"as an AI\", \"berikut adalah kode\", \"generated by\""
+    },
+    {
+      "id": "I4",
+      "tingkat": "sedang",
+      "uraian": "Riwayat commit tidak wajar: kurang dari 3 commit, atau lebih dari 70% baris kode masuk dalam satu commit"
+    },
+    {
+      "id": "I5",
+      "tingkat": "sedang",
+      "uraian": "Fork dibuat atau push dilakukan sebelum waktu dibuka kelasmu"
+    },
+    {
+      "id": "I6",
+      "tingkat": "tinggi",
+      "uraian": "NIM tidak terdaftar, kelas atau nama tidak sesuai data kelas, atau satu NIM dipakai lebih dari satu fork"
+    },
+    {
+      "id": "I7",
+      "tingkat": "tinggi",
+      "uraian": "Kemiripan kode dengan fork lain di atas 60% setelah kode starter dan contoh resmi dikeluarkan"
+    },
+    {
+      "id": "I8",
+      "tingkat": "sedang",
+      "uraian": "Commit di fork dibuat oleh lebih dari satu penulis (nama/email Git berbeda)"
+    }
+  ]
+}

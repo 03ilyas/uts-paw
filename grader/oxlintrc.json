@@ -1,0 +1,6 @@
+{
+  "plugins": ["react", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error"
+  }
+}

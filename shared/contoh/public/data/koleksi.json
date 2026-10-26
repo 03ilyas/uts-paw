@@ -1,0 +1,4 @@
+[
+  { "id": "1", "judul": "Laporan praktikum CSS", "kategori": "Kuliah", "tenggat": "2026-10-28", "prioritas": "tinggi" },
+  { "id": "2", "judul": "Rapat himpunan", "kategori": "Organisasi", "tenggat": "2026-10-29", "prioritas": "sedang" }
+]

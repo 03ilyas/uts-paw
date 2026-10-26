@@ -1,0 +1,102 @@
+# Penilaian akhir oleh dosen. Jalankan manual dari tab Actions setelah tenggat.
+# Hasil: artifact "rekap-nilai" berisi nilai.csv dan laporan.md.
+name: Nilai UTS
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: Nilai satu fork saja (contoh USERNAME/uts-paw). Kosongkan untuk semua fork.
+        required: false
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  daftar:
+    if: github.repository == 'mh4Scripts/uts-paw'
+    runs-on: ubuntu-latest
+    outputs:
+      forks: ${{ steps.daftar.outputs.forks }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - id: daftar
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO_INPUT: ${{ inputs.repo }}
+        run: |
+          if [ -n "$REPO_INPUT" ]; then
+            echo "forks=$(node -e 'console.log(JSON.stringify([process.argv[1]]))' "$REPO_INPUT")" >> "$GITHUB_OUTPUT"
+          else
+            echo "forks=$(node grader/periksa.mjs --daftar)" >> "$GITHUB_OUTPUT"
+          fi
+
+  periksa:
+    needs: daftar
+    if: needs.daftar.outputs.forks != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        repo: ${{ fromJSON(needs.daftar.outputs.forks) }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # Token dan data kelas hanya dipakai untuk menentukan kelas, tenggat, dan commit
+      # yang dinilai. target.json hanya memuat entri data kelas milik mahasiswa ini.
+      # Langkah berikutnya menjalankan kode mahasiswa dan sengaja tidak menerima secret apa pun.
+      - name: Tentukan kelas dan commit sebelum tenggat
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DAFTAR_KELAS: ${{ secrets.DAFTAR_KELAS }}
+          REPO: ${{ matrix.repo }}
+        run: node grader/periksa.mjs --target "$REPO" > "$RUNNER_TEMP/target.json"
+
+      - name: Nilai
+        env:
+          REPO: ${{ matrix.repo }}
+        run: |
+          node grader/periksa.mjs --repo "$REPO" --target-file "$RUNNER_TEMP/target.json" --out hasil
+          echo "ARTIFACT=hasil-${REPO//\//__}" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: hasil/
+          retention-days: 30
+
+  rekap:
+    needs: [daftar, periksa]
+    if: always() && needs.daftar.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: hasil-*
+          merge-multiple: true
+          path: hasil
+      - run: node grader/rekap.mjs hasil rekap
+      - uses: actions/upload-artifact@v7
+        with:
+          name: rekap-nilai
+          path: rekap/
+          retention-days: 90
