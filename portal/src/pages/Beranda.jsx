@@ -90,7 +90,7 @@ export default function Beranda() {
           <span className="kicker">{UTS.judul} · {UTS.semester}</span>
           <h1>Bangun dan deploy aplikasi React dalam tiga hari.</h1>
           <p className="lead">
-            UTS {UTS.mataKuliah} dikerjakan sebagai proyek: fork repo induk, bangun aplikasi katalog sesuai tema NIM kamu
+            Ujian tengah semester {UTS.mataKuliah} dikerjakan sebagai proyek: fork repo induk, bangun aplikasi katalog sesuai tema NIM kamu
             dengan materi P1 sampai P7, lalu deploy ke GitHub Pages. Penilaian berjalan otomatis berdasarkan rubrik.
           </p>
           <Space wrap size="middle">

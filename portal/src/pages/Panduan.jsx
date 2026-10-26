@@ -81,7 +81,7 @@ npm run cek      # perkiraan skor seluruh rubrik`}</Kode>
 git commit -m "feat: halaman koleksi dan pencarian"
 git push`}</Kode>
         <p>
-          Commit sedikit demi sedikit dengan pesan yang jelas. Setiap push menjalankan workflow <strong>UTS</strong> di
+          Commit sedikit demi sedikit dengan pesan yang jelas. Setiap push menjalankan workflow <strong>Build dan Deploy</strong> di
           tab Actions: <em>build</em>, <em>deploy</em>, lalu <em>cek</em>. Buka run tersebut dan lihat bagian{' '}
           <strong>Summary</strong> untuk tabel skor.
         </p>
@@ -103,7 +103,7 @@ git push`}</Kode>
             <strong>Settings → Pages</strong>: tertulis di bagian atas, <em>Your site is live at ...</em>
           </li>
           <li>
-            Tab <strong>Actions</strong> → run <strong>UTS</strong> terakhir → job <strong>deploy</strong>: alamatnya tampil di bawah
+            Tab <strong>Actions</strong> → run <strong>Build dan Deploy</strong> terakhir → job <strong>deploy</strong>: alamatnya tampil di bawah
             nama job.
           </li>
           <li>
@@ -142,7 +142,7 @@ const MASALAH = [
   {
     key: 'actions',
     label: 'Tidak ada workflow yang berjalan setelah push',
-    children: <p>Actions belum diaktifkan di fork. Ulangi langkah 2, lalu push ulang atau klik Run workflow pada workflow UTS.</p>,
+    children: <p>Actions belum diaktifkan di fork. Ulangi langkah 2, lalu push ulang atau klik Run workflow pada workflow Build dan Deploy.</p>,
   },
   {
     key: 'pages',

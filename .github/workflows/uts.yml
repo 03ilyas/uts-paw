@@ -1,8 +1,8 @@
 # Satu workflow untuk dua peran:
-# - Di repo induk (mh4Scripts/uts-paw): build portal/ dan tayangkan di domain UTS.
+# - Di repo induk (mh4Scripts/uts-paw): build portal/ dan tayangkan di domain ujian.
 # - Di fork mahasiswa: build app/, tayangkan di USERNAME.github.io/uts-paw, lalu cek rubrik.
 # Mahasiswa tidak perlu mengubah berkas ini.
-name: UTS
+name: Build dan Deploy
 
 on:
   push:

@@ -47,7 +47,7 @@ export default function App() {
 
   useEffect(() => {
     const judul = HALAMAN.find((h) => h.key === aktif)?.judul
-    document.title = judul && aktif !== '/' ? `${judul} | UTS PAW` : 'UTS Pengembangan Aplikasi Web'
+    document.title = judul && aktif !== '/' ? `${judul} | Ujian Tengah Semester Pengembangan Aplikasi Web` : 'Ujian Tengah Semester Pengembangan Aplikasi Web'
     window.scrollTo(0, 0)
   }, [aktif])
 
@@ -62,8 +62,8 @@ export default function App() {
         <Link to="/" className="merek">
           <img src={`${import.meta.env.BASE_URL}itera-logo.png`} alt="ITERA" width="28" height="34" />
           <span>
-            <strong>UTS PAW</strong>
-            <small>IF25-22014</small>
+            <strong>Ujian Tengah Semester</strong>
+            <small>Pengembangan Aplikasi Web</small>
           </span>
         </Link>
         {layar.md ? (

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Pemeriksa otomatis UTS PAW.
+// Pemeriksa otomatis Ujian Tengah Semester Pengembangan Aplikasi Web.
 //
 //   node grader/periksa.mjs --lokal app            cek mandiri di komputer sendiri
 //   node grader/periksa.mjs --repo user/uts-paw    nilai satu fork
@@ -264,7 +264,7 @@ function laporanMarkdown(hasil) {
     (r) => `| ${r.id} | ${r.uraian} | ${r.skor}/${r.bobot} | ${r.lulus ? 'lulus' : 'belum'} | ${r.catatan.replace(/\|/g, '/')} |`,
   )
   return [
-    `## Hasil pemeriksaan UTS PAW: ${hasil.total}/100`,
+    `## Hasil pemeriksaan Ujian Tengah Semester Pengembangan Aplikasi Web: ${hasil.total}/100`,
     '',
     `Mahasiswa: ${hasil.mahasiswa.nama || '-'} (${hasil.mahasiswa.nim || '-'}), tema: ${hasil.tema ?? '-'}`,
     hasil.url ? `Deployment: ${hasil.url}` : '',

@@ -1,6 +1,6 @@
 # Penilaian akhir oleh dosen. Jalankan manual dari tab Actions setelah tenggat.
 # Hasil: artifact "rekap-nilai" berisi nilai.csv dan laporan.md.
-name: Nilai UTS
+name: Penilaian Ujian Tengah Semester
 
 on:
   workflow_dispatch:

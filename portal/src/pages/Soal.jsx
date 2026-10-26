@@ -53,7 +53,7 @@ export default function Soal() {
           <h2 id="ketentuan">Ketentuan umum</h2>
           <ol>
             <li>
-              UTS dikerjakan secara individu sebagai ujian take-home selama tiga hari sesuai jadwal kelas:
+              Ujian dikerjakan secara individu sebagai ujian take-home selama tiga hari sesuai jadwal kelas:
               <ul>
                 {KELAS.map((k) => (
                   <li key={k.kode}>

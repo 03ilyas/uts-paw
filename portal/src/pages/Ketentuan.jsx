@@ -29,7 +29,7 @@ export default function Ketentuan() {
   return (
     <>
       <KepalaHalaman kicker="Ketentuan" judul="Ketentuan ujian dan pelanggaran">
-        Berlaku untuk seluruh peserta UTS kelas RA dan RB. Dengan melakukan fork repo UTS, kamu dianggap telah membaca dan menyetujui
+        Berlaku untuk seluruh peserta ujian tengah semester kelas RA dan RB. Dengan melakukan fork repo ujian, kamu dianggap telah membaca dan menyetujui
         ketentuan ini.
       </KepalaHalaman>
 
@@ -82,7 +82,7 @@ export default function Ketentuan() {
           type="error"
           showIcon
           title="Sanksi sesuai kontrak kuliah"
-          description="Nilai UTS menjadi 0 bila terbukti mencontek, bekerja sama, atau memakai AI generatif untuk mengerjakan ujian."
+          description="Nilai ujian tengah semester menjadi 0 bila terbukti mencontek, bekerja sama, atau memakai AI generatif untuk mengerjakan ujian."
           style={{ margin: '12px 0 16px' }}
         />
         <ol>
@@ -90,7 +90,7 @@ export default function Ketentuan() {
             Indikasi bukan vonis. Mahasiswa dengan indikasi diminta klarifikasi: mendemokan aplikasi, menjelaskan kode, dan mengubah bagian
             tertentu langsung di depan dosen.
           </li>
-          <li>Bila klarifikasi menunjukkan pelanggaran, nilai UTS menjadi 0.</li>
+          <li>Bila klarifikasi menunjukkan pelanggaran, nilai ujian tengah semester menjadi 0.</li>
           <li>
             Bila kamu tidak dapat menjelaskan kode yang kamu kumpulkan, nilai butir terkait disesuaikan meskipun tidak ada indikasi otomatis.
           </li>

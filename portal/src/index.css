@@ -508,7 +508,7 @@ pre {
 
 .langkah-tutorial :not(pre) > code,
 .tutorial-pengantar code,
-.tutorial .ant-alert code {
+.tutorial .ant-alert :not(pre) > code {
   padding: 1px 6px;
   border-radius: 4px;
   background: var(--netral);
