@@ -34,6 +34,37 @@
   gap: 1rem;
 }
 
+.kartu {
+  padding: 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+}
+
+.kartu h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.kartu p {
+  margin: 0;
+  color: #57606a;
+}
+
+.alat-koleksi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.alat-koleksi input,
+.alat-koleksi select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  font: inherit;
+}
+
 @media (max-width: 768px) {
   .kepala {
     flex-direction: column;

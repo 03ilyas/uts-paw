@@ -1,4 +1,8 @@
 [
   { "id": "1", "judul": "Laporan praktikum CSS", "kategori": "Kuliah", "tenggat": "2026-10-28", "prioritas": "tinggi" },
-  { "id": "2", "judul": "Rapat himpunan", "kategori": "Organisasi", "tenggat": "2026-10-29", "prioritas": "sedang" }
+  { "id": "2", "judul": "Rapat himpunan", "kategori": "Organisasi", "tenggat": "2026-10-29", "prioritas": "sedang" },
+  { "id": "3", "judul": "Kuis JavaScript", "kategori": "Kuliah", "tenggat": "2026-10-30", "prioritas": "tinggi" },
+  { "id": "4", "judul": "Proposal lomba web", "kategori": "Lomba", "tenggat": "2026-11-02", "prioritas": "sedang" },
+  { "id": "5", "judul": "Notulen kegiatan", "kategori": "Organisasi", "tenggat": "2026-11-03", "prioritas": "rendah" },
+  { "id": "6", "judul": "Ringkasan materi React", "kategori": "Kuliah", "tenggat": "2026-11-05", "prioritas": "sedang" }
 ]

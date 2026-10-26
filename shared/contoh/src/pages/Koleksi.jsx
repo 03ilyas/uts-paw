@@ -21,12 +21,14 @@ export default function Koleksi() {
   return (
     <section>
       <h1>Koleksi</h1>
-      <KotakPencarian nilai={cari} onUbah={setCari} />
-      <select aria-label="Kategori" value={kategori} onChange={(e) => setKategori(e.target.value)}>
-        {daftarKategori.map((k) => (
-          <option key={k}>{k}</option>
-        ))}
-      </select>
+      <div className="alat-koleksi">
+        <KotakPencarian nilai={cari} onUbah={setCari} />
+        <select aria-label="Kategori" value={kategori} onChange={(e) => setKategori(e.target.value)}>
+          {daftarKategori.map((k) => (
+            <option key={k}>{k}</option>
+          ))}
+        </select>
+      </div>
       {tampil.length === 0 ? (
         <p>Tidak ada item yang cocok.</p>
       ) : (
