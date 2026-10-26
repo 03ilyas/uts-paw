@@ -18,9 +18,14 @@ const kolomTema = [
   { title: 'Digit', dataIndex: 'digit', width: 72, align: 'center' },
   { title: 'Tema', dataIndex: 'nama', render: (v) => <strong>{v}</strong> },
   {
-    title: 'Field tema (selain id, judul, kategori)',
+    title: 'Nama field di data',
     dataIndex: 'field',
     render: (field) => field.map((f) => <code key={f.kunci} style={{ marginRight: 6 }}>{f.kunci}</code>),
+  },
+  {
+    title: 'Label yang ditampilkan',
+    key: 'label',
+    render: (_, t) => t.field.map((f) => f.label.split('(')[0].trim()).join(', '),
   },
 ]
 
@@ -89,8 +94,22 @@ export default function Soal() {
           <p>
             Tema ditentukan oleh <strong>digit terakhir NIM</strong>. Setiap item data wajib memiliki field{' '}
             <code>id</code>, <code>judul</code>, <code>kategori</code>, ditambah tiga field tema berikut. Nama field
-            harus sama persis (huruf besar-kecil berpengaruh).
+            harus sama persis (huruf besar-kecil berpengaruh). Label pada kolom terakhir wajib tampil di halaman detail dan
+            dipakai sebagai label input di form.
           </p>
+          <Alert
+            type="error"
+            showIcon
+            title="Kerjakan tema sesuai NIM-mu"
+            description={
+              <>
+                Tema diperiksa dari NIM di <code>app/mahasiswa.json</code>, dan NIM itu dicocokkan dengan data kelas. Mengerjakan tema
+                lain, termasuk tema Daftar Tugas dari contoh kode, membuat butir A1, C1, C13, dan C14 gagal. Cek temamu di halaman
+                Beranda.
+              </>
+            }
+            style={{ margin: '12px 0 16px' }}
+          />
           <Table rowKey="digit" size="middle" pagination={false} columns={kolomTema} dataSource={UTS.tema} scroll={{ x: 560 }} />
 
           <h2 id="aplikasi">Spesifikasi aplikasi</h2>
@@ -158,6 +177,10 @@ export default function Soal() {
               Halaman detail punya tombol bertuliskan <strong>Hapus</strong>. Konfirmasi memakai{' '}
               <code>window.confirm</code>, lalu arahkan ke <code>/koleksi</code>. Untuk id yang tidak ada, tampilkan teks
               "tidak ditemukan" di halaman detail tanpa teks "404".
+            </li>
+            <li>
+              Halaman detail menampilkan ketiga field tema dengan label seperti kolom <em>Label yang ditampilkan</em> di tabel tema
+              (misalnya <strong>Harga Tiket</strong>), dan form <code>/tambah</code> punya input berlabel sama untuk ketiganya.
             </li>
             <li>Halaman 404 memuat teks <strong>404</strong>.</li>
             <li>

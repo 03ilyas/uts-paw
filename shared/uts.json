@@ -319,7 +319,7 @@
         },
         {
           "id": "A2",
-          "bobot": 6,
+          "bobot": 4,
           "uraian": "Situs GitHub Pages dapat diakses dan memuat aplikasi React",
           "cara": "Request HTTP ke URL Pages, mencari elemen #root"
         },
@@ -375,7 +375,7 @@
         },
         {
           "id": "C3",
-          "bobot": 5,
+          "bobot": 4,
           "uraian": "Halaman /koleksi mengambil data dengan fetch dan menampilkan semua item",
           "cara": "Uji otomatis dosen"
         },
@@ -405,7 +405,7 @@
         },
         {
           "id": "C8",
-          "bobot": 5,
+          "bobot": 4,
           "uraian": "Form /tambah menyimpan item baru ke localStorage dan item muncul di /koleksi",
           "cara": "Uji otomatis dosen"
         },
@@ -431,6 +431,18 @@
           "id": "C12",
           "bobot": 2,
           "uraian": "Rute yang tidak dikenal menampilkan halaman 404",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C13",
+          "bobot": 2,
+          "uraian": "Halaman /koleksi/:id menampilkan ketiga field tema sesuai NIM, lengkap dengan labelnya",
+          "cara": "Uji otomatis dosen"
+        },
+        {
+          "id": "C14",
+          "bobot": 2,
+          "uraian": "Form /tambah punya input berlabel untuk ketiga field tema sesuai NIM",
           "cara": "Uji otomatis dosen"
         }
       ]

@@ -9,11 +9,17 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import App from '../App.jsx'
 import koleksi from '../../public/data/koleksi.json'
 import mahasiswa from '../../mahasiswa.json'
+import TEMA from './tema.json'
 
 const TUNGGU = { timeout: 3000 }
 const JUDUL_BARU = 'Item Uji Otomatis 7319'
 
 const escape = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+// Label field tema sesuai digit terakhir NIM. "Harga Tiket (Rp)" cukup ditulis "Harga Tiket",
+// dan "Kabupaten/Kota" boleh ditulis salah satunya.
+const tema = TEMA.find((t) => String(t.digit) === String(mahasiswa.nim ?? '').trim().slice(-1))
+const polaLabel = (label) => new RegExp(label.split('(')[0].trim().split('/').map((b) => escape(b.trim())).join('|'), 'i')
 const teks = (s) => new RegExp(escape(s), 'i')
 
 // Item yang judulnya tidak menjadi bagian dari judul item lain, supaya
@@ -161,6 +167,25 @@ describe('rubrik', () => {
   test('C12 rute tidak dikenal menampilkan 404', async () => {
     buka('/halaman-yang-tidak-ada-xyz')
     expect((await screen.findAllByText(/404/, {}, TUNGGU)).length).toBeGreaterThan(0)
+  })
+
+  test('C13 detail menampilkan tiga field tema', async () => {
+    expect(tema, `NIM "${mahasiswa.nim}" di mahasiswa.json belum valid`).toBeTruthy()
+    const target = itemUnik()
+    buka(`/koleksi/${target.id}`)
+    await screen.findAllByText(teks(target.judul), {}, TUNGGU)
+    for (const f of tema.field) {
+      expect(screen.queryAllByText(polaLabel(f.label)).length, `label "${f.label}" tidak tampil di halaman detail`).toBeGreaterThan(0)
+    }
+  })
+
+  test('C14 form punya input berlabel untuk tiga field tema', async () => {
+    expect(tema, `NIM "${mahasiswa.nim}" di mahasiswa.json belum valid`).toBeTruthy()
+    buka('/tambah')
+    await screen.findByRole('button', { name: /simpan/i }, TUNGGU)
+    for (const f of tema.field) {
+      expect(screen.queryAllByLabelText(polaLabel(f.label)).length, `tidak ada input berlabel "${f.label}" di form`).toBeGreaterThan(0)
+    }
   })
 
   test('E1 tata letak memakai header, nav, main, footer', async () => {

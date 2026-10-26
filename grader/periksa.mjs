@@ -156,11 +156,12 @@ function cekUjiDosen(appDir, kerja) {
   rmSync(tujuan, { recursive: true, force: true })
   mkdirSync(tujuan, { recursive: true })
   cpSync(join(GRADER, 'uji/rubrik.test.jsx'), join(tujuan, 'rubrik.test.jsx'))
+  writeFileSync(join(tujuan, 'tema.json'), JSON.stringify(UTS.tema))
   const out = join(kerja, 'vitest-rubrik.json')
   const r = jalankan('npx', ['vitest', 'run', 'src/__rubrik__/rubrik.test.jsx', '--reporter=json', `--outputFile=${out}`], appDir)
   rmSync(tujuan, { recursive: true, force: true })
   const tests = hasilVitest(out)
-  const ids = ['C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'E1']
+  const ids = ['C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'C13', 'C14', 'E1']
   return Object.fromEntries(
     ids.map((id) => {
       const t = tests.find((x) => x.title.startsWith(`${id} `))
