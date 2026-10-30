@@ -6,7 +6,7 @@
 - **Tema**: Jurnal Latihan Olahraga
 - **Deployment**: https://03ilyas.github.io/uts-paw/
 
-![Tangkapan layar beranda](./docs/beranda.png)
+![Tangkapan layar beranda](beranda.png)
 
 ## Fitur
 
