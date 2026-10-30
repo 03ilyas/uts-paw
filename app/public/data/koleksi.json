@@ -1,10 +1,82 @@
 [
   {
     "id": "1",
-    "judul": "Contoh item pertama",
-    "kategori": "Contoh",
-    "fieldTema1": "ganti sesuai field tema",
-    "fieldTema2": 0,
-    "fieldTema3": "ganti sesuai field tema"
+    "judul": "Lari Pagi Keliling Embung",
+    "kategori": "Kardio",
+    "tanggal": "2026-10-20",
+    "durasi": 30,
+    "kalori": 250
+  },
+  {
+    "id": "2",
+    "judul": "Latihan Beban Dada dan Trisep",
+    "kategori": "Kekuatan",
+    "tanggal": "2026-10-21",
+    "durasi": 45,
+    "kalori": 220
+  },
+  {
+    "id": "3",
+    "judul": "Sesi Yoga Relaksasi Pagi",
+    "kategori": "Kelenturan",
+    "tanggal": "2026-10-22",
+    "durasi": 40,
+    "kalori": 140
+  },
+  {
+    "id": "4",
+    "judul": "Futsal Antar Mahasiswa Teknik",
+    "kategori": "Permainan",
+    "tanggal": "2026-10-23",
+    "durasi": 60,
+    "kalori": 480
+  },
+  {
+    "id": "5",
+    "judul": "Berenang Gaya Bebas Santai",
+    "kategori": "Kardio",
+    "tanggal": "2026-10-24",
+    "durasi": 35,
+    "kalori": 290
+  },
+  {
+    "id": "6",
+    "judul": "Senam Peregangan Otot Statis",
+    "kategori": "Kelenturan",
+    "tanggal": "2026-10-25",
+    "durasi": 25,
+    "kalori": 95
+  },
+  {
+    "id": "7",
+    "judul": "Latihan Kebugaran Punggung",
+    "kategori": "Kekuatan",
+    "tanggal": "2026-10-26",
+    "durasi": 50,
+    "kalori": 260
+  },
+  {
+    "id": "8",
+    "judul": "Bulu Tangkis Tunggal Putra",
+    "kategori": "Permainan",
+    "tanggal": "2026-10-27",
+    "durasi": 45,
+    "kalori": 350
+  },
+  {
+    "id": "9",
+    "judul": "Bersepeda Menjelajah Sore Hari",
+    "kategori": "Kardio",
+    "tanggal": "2026-10-28",
+    "durasi": 55,
+    "kalori": 380
+  },
+  {
+    "id": "10",
+    "judul": "Latihan Inti Perut dan Plank",
+    "kategori": "Kekuatan",
+    "tanggal": "2026-10-29",
+    "durasi": 30,
+    "kalori": 160
   }
 ]
